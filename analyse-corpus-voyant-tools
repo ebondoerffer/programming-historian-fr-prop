@@ -1,0 +1,1008 @@
+# Analyse de corpus avec Voyant Tools
+
+Cette leçon vous apprend à organiser et analyser un corpus textuel sur la plateforme Voyant Tools.
+
+# Table des matières  {#table-des-matières}
+
+[Table des matières](#table-des-matières)
+
+[Introduction](#introduction)
+
+[Analyse de corpus.](#analyse-de-corpus.)
+
+[Qu’allez vous apprendre dans cette leçon](#qu’allez-vous-apprendre-dans-cette-leçon-?)
+
+[Créer un corpus en plein texte](#créer-un-corpus-en-plein-texte)
+
+[1\. Choisir les textes](#choisir-les-textes)
+
+[2\. Copier dans un éditeur de texte](#copier-dans-un-éditeur-de-texte)
+
+[3\. Enregistrer le fichier](#enregistrer-le-fichier)
+
+[Charger le corpus](#charger-le-corpus)
+
+[Explorer le corpus](#explorer-le-corpus)
+
+[Résumé des documents : caractéristiques de base de votre corpus textuel.](#résumé-des-documents-:-caractéristiques-de-base-de-votre-corpus-textuel.)
+
+[Nombre de documents, mots et formes verbales uniques](#nombre-de-documents,-mots-et-formes-verbales-uniques)
+
+[Taille du document](#taille-du-document)
+
+[Densité du vocabulaire](#densité-du-vocabulaire)
+
+[Moyenne des mots par phrase](#moyenne-des-mots-par-phrase)
+
+[Cirrus et Résumé : Fréquences et filtres de mots vides (stopwords)](#cirrus-et-résumé-:-fréquences-et-filtres-de-mots-vides-\(stopwords\))
+
+[Les fréquences non filtrées](#les-fréquences-non-filtrées)
+
+[Mots vide (Stopwords)](#mots-vide-\(stopwords\))
+
+[Fréquences et Mots vides filtrés](#fréquences-et-mots-vides-filtrés)
+
+[Termes :](#termes)
+
+[Fréquences normalisées (fréquence relative)](#fréquences-normalisées-\(fréquence-relative\))
+
+[Asymétrie statistique](#asymétrie-statistique)
+
+[Mots distinctifs (par rapport au reste du corpus):](#mots-distinctifs-\(par-rapport-au-reste-du-corpus\))
+
+[Mots en Contexte](#mots-en-contexte)
+
+[Exporter des tableaux](#exporter-des-tableaux)
+
+[Correction des activités](#correction-des-activités)
+
+[Bibliographie](#bibliographie)
+
+# Introduction {#introduction}
+
+Dans cette leçon on va voir les premières étapes pour créer un corpus textuel. On passera en revue les éléments centraux de l’analyse quantitative textuelle. Pour ce faire on utilisera Voyant Tools, une plateforme en ligne disponible avec une simple connexion internet, sans création de compte ni installation.  
+Cette leçon est une introduction pour débutant.es à l’analyse de corpus textuel et s’inscrit dans un écosystème d’outils grandissants de méthodes présentant les humanités numériques. Sur le même thème, vous pouvez également explorer la leçon [Analyse de corpus avec AnTonc](https://programminghistorian.org/fr/lecons/analyse-corpus-antconc) disponible en français.
+
+## Analyse de corpus. {#analyse-de-corpus.}
+
+L’analyse de corpus est un type d’[analyse de contenu](https://fr.wikipedia.org/wiki/Analyse_de_contenu) qui permet la comparaison textuelle à grande échelle.  
+Depuis les débuts de l’informatique, les linguistes computationnels et les spécialistes en [recherche d’informations](https://fr.wikipedia.org/wiki/Recherche_d%27information#) créent et utilisent des logiciels pour identifier des motifs qui ne seraient pas facilement identifiables à l’oeil nu, ou pour corroborer des hypothèses formulées intuitivement lors de la lecture de certains textes, mais dont la vérification exige un travail laborieux, coûteux et répétitif. Par exemple, pour mettre en évidence des tendances de hausse ou de baisse d’usage de certains termes sur une période donnée, il était nécessaire d'embaucher des gens pour examiner manuellement un texte et noter les nombres d’occurrences du terme recherché. En observant les capacités de calcul des ordinateurs, les spécialistes ont rapidement écrit des programmes qui facilitent les tâches de création de listes de fréquences et tableaux de concordances. Le programme que vous allez apprendre à utiliser dans cette leçon s’inscrit dans ce contexte historique. 
+
+
+## Qu’allez vous apprendre dans cette leçon ?  {#qu’allez-vous-apprendre-dans-cette-leçon-?}
+
+Voyant Tools est un outil en ligne qui ne requiert aucune installation de logiciel et qui fonctionne sur n’importe quel ordinateur ayant une connexion internet. 
+
+Comme évoqué dans la leçon [Analyse de corpus avec AntConc](https://programminghistorian.org/fr/lecons/analyse-corpus-antconc), cet outil est une bonne porte d’entrée à l’utilisation d’autres méthodes plus complexes. 
+
+A la fin de cette leçon, vous serez capable de : 
+
+- assembler un corpus en texte brut   
+- charger votre corpus dans Voyant Tools  
+- comprendre et appliquer différentes méthodes de segmentation de corpus  
+- identifier les caractéristiques basiques de vos textes :   
+  - taille des documents importés  
+  - densité lexicale (appelée densité du vocabulaire sur la plateforme)  
+  - moyenne des mots par phrase  
+- lire et comprendre les différentes statiques sur les mots : fréquence absolue, fréquence normalisée, [l’asymétrie](https://fr.wikipedia.org/wiki/Asym%C3%A9trie_\(statistiques\)) statistique et les mots distinctifs  
+- chercher des mots clés en contexte (KeyWords In Context, KWIC) et exporter les données et visualisation dans différents formats (CSV, PNG, HTML)
+
+# Créer un corpus en plein texte {#créer-un-corpus-en-plein-texte}
+
+Bien que Voyant Tools accepte plusieurs formats (HTML, XML, PDF, RTF, et MS Word), dans cette leçon nous allons utiliser le texte brut (TXT). Le format texte brut  a trois avantages : il ne requiert aucun formatage additionnel, aucun programme spécial et aucune connaissances supplémentaires en analyse textuelle. 
+
+1. ## Choisir les textes {#choisir-les-textes}
+
+La première chose à faire est de chercher les informations qui vous intéressent. Pour cette leçon nous allons utiliser le corpus français du projet ELTeC : European Literary Text Collection. Il est constitué de 100 romans français qui sont dans le domaine public, et qui sont donc libres de droit, vous pouvez l’utiliser en le citant de la façon suivante :   
+	French Novel Corpus (ELTeC-fra), edited by Christof Schöch and Lou Burnard. Version v1.0.1, April 2021\. In: European Literary Text Collection (ELTeC). COST Action Distant Reading for European Literary History. DOI: https://doi.org/10.5281/zenodo.4662433
+
+2. ## Copier dans un éditeur de texte {#copier-dans-un-éditeur-de-texte}
+
+Une fois les informations localisées, la deuxième étape est de copier le texte qui vous intéresse et de le sauvegarder dans un éditeur de texte. Par exemple : 
+
+- Avec Windows, vous pouvez utiliser le [Bloc-notes](https://apps.microsoft.com/detail/9msmlrh6lzf3?hl=fr-FR&gl=FR)   
+- Avec Mac, dans TextEdit  
+- Et avec Linux, dans Gedit
+
+3. ## Enregistrer le fichier {#enregistrer-le-fichier}
+
+Quand vous enregistrez le texte, vous devez prendre en compte trois éléments essentiels. 
+
+Premièrement, enregistrez vos textes au format [UTF-8](https://fr.wikipedia.org/wiki/UTF-8), un format de [codage de caractères](https://fr.wikipedia.org/wiki/Codage_des_caract%C3%A8res#) à l’origine utilisé en anglais, mais qui s’est largement répandu.
+
+Pour bien comprendre l’importance de l’UTF-8 prenons l’exemple du ‘É’.  Bien que le caractère qui s’afficher est ‘É’, il s’agit en réalité d’une de zéros et de uns que l’ordinateur interprète comme une image en fonction du “codeur” utilisé. L'encodeur qui contient les codes binaires pour tous les caractères utilisés en français, anglais ou espagnol est l’UTF-8. ‘11000011’ est la chaîne de huit bits \- huit espaces d’information \- qui, en UTF-8, est interprétée comme ‘É’.
+### Windows : 
+
+1. Ouvrir le Bloc-notes  
+2. Coller ou écrire le texte, appuyer sur **Enregistrer sous**  
+3. Dans la barre Codage, sélectionnez UTF-8.  
+4. Choisir un nom de fichier et enregistrer en Fichiers texte (.txt)
+
+### Mac : 
+
+1. Ouvrir le TextEdit  
+2. Coller ou écrire le texte  
+3. Convertir en plein texte dans l’onglet **Format** du menu  
+4. Choisir un nom de fichier, dans la barre Codage, sélectionnez UTF-8 et enregistrer en Fichiers texte (.txt)
+
+### Linux : 
+
+1. Ouvrir Gedit  
+2. Coller ou écrire le texte  
+3. En enregistrant, sélectionnez UTF-8 dans la fenêtre de codage de caractères.
+
+Deuxièmement, il faut prendre en considération le nommage de votre fichier. Il ne doit comprendre aucun accent, ni espaces, ni caractères spéciaux, afin de pouvoir être ouvert sur d’autres systèmes d’exploitations.   
+Pour des raisons similaires au point précédent, un fichier nommé Ébano.txt ne sera pas toujours compris correctement par tous les systèmes d'exploitations, puisqu'ils utilisent parfois des encodeurs différents. Beaucoup utilisent par exemple ASCII, qui n’a que  sept bits, donc le dernier bit (‘1’) du ‘É’ sera interprété comme le premier bit de la prochaine chaîne de caractère.   
+
+Troisièmement, il est préférable d’inclure certaines métadonnées directement dans le nom du fichier (date, genre, auteur, origine). Cela peut vous aider à sous diviser votre corpus en fonction de ces différents critères et à mieux lire les résultats.
+
+Pour cette leçon, les fichiers sont nommés dans le projet ELTeC avec le code de trois lettres de la langue du texte (ici  FRA) et un numéro d’identification de cinq chiffres suivi du nom de l’auteur. Par exemple, FRA00101\_Adam.txt 
+
+# Charger le corpus {#charger-le-corpus}
+
+Sur la page de garde de Voyant Tools, vous trouverez quatres options pour charger les textes. Les deux premières options sont directement disponibles dans la zone de texte. Vous pouvez y coller directement un texte que vous aviez copié, ou coller un ou plusieurs liens internet \- séparés par des virgules \- de sites où se trouve les textes que vous voulez analyser. Une troisième option est de cliquer sur **Ouvrir** et sélectionner un des trois corpus sauvegardés sur Voyant Tools (corpus en anglais, des pièces de Shakespear, des romans d’Austen et le *Frankenstein* de Shelley).
+
+La quatrième option, celle que l’on va utiliser, est de directement charger les documents depuis l’ordinateur. Dans notre cas, on va charger le corpus complet de romans en français ELTeC.
+
+Pour importer le corpus, on clique sur le bouton Charger, ouvrir l’explorateur de fichiers et sélectionner tous les fichiers que l’on veut analyser. 
+
+![][charger-corp.png]  
+Figure. Chargement des documents dans Voyant Tools.
+
+# Explorer le corpus {#explorer-le-corpus}
+
+Une fois les fichiers importés on arrive sur l’interface principale qui affiche cinq outils par défaut. Voici une brève explication de ces outils : 
+
+**Cirrus** est un nuage de mots qui affiche les termes les plus fréquents :   
+![][cirrus.png]  
+Figure. Cirrus
+
+**Lecteur** est un espace pour lire les textes entiers, avec un graphique en barre qui indique la quantité de texte dans chaque document.![][lecteur.png]  
+Figure. Lecteur
+
+**Tendances** est un graphe qui affiche la distribution des termes dans l’ensemble du corpus (ou dans un seul document)![][tendances.png]  
+Figure. Tendances
+
+**Résumé** est un vue générale de certaines statistique textuelles du corpus  
+![][resume.png]  
+Figure. Résumé
+
+**Contextes** est une concordance qui affiche les occurrences d’un mot clé entouré de son contexte.  
+![][contexte.png]  
+Figure. Contextes.
+
+# Résumé des documents : caractéristiques de base de votre corpus textuel. {#résumé-des-documents-:-caractéristiques-de-base-de-votre-corpus-textuel.}
+
+La fenêtre Résumé de Voyant Tools est celle qui contient le plus d'informations. On a une vue d'ensemble statistique du corpus, ce qui sert de bon point de départ. Dans les sections suivantes, on donnera une explication des différentes mesures qui apparaissent dans cette fenêtre.   
+Vous trouverez neufs activités qui peuvent être effectuées seul ou en groupe. Pour cinq d’entre elles les réponses sont à la fin de la leçon pour servir de guide. Le reste des activités est pensé pour encourager la réflexion et la discussion entre les participants qui interagiront avec elles.
+
+## Nombre de documents, mots et formes verbales uniques {#nombre-de-documents,-mots-et-formes-verbales-uniques}
+
+La première phrase ressemble à cela :   
+*Ce corpus contient 100 documents, 8,171,576 mots et 104,508 formes verbales uniques.*
+
+Dès le début, avec ces informations on sait exactement combien de documents distincts ont été chargés, combien il y a de mots au total et combien de formes uniques existent. 
+
+### Activité 1 : 
+
+Si votre corpus est composé de deux documents, l'un disant : « J'ai faim » et l'autre : « J'ai sommeil », quelles informations figurent dans la première ligne du résumé ? Complétez :
+
+*Ce corpus comporte \_\_ documents, pour un total de \_\_ mots et \_\_ mots uniques.*
+
+*Indice :* Comptez le nombre total de documents, le nombre total de mots et le nombre de formes uniques (les mots répétés comme « j'ai » ne comptent qu'une seule fois).
+
+## Taille du document  {#taille-du-document}
+
+La deuxième information est la partie taille du document. Ici telle qu’elle est présentée : 
+
+- Ordre décroissant : FRA04202\_Rolland (548787); FRA01902\_Gaboriau (252352); FRA04901\_Dumas (204685); FRA07601\_Leroux (204623); FRA05602\_Lesueur (192649)  
+- Ordre croissant : FRA02001\_Gilbert (20325); FRA00101\_Adam (20364); FRA01102\_Dombre (23600); FRA02401\_LeRouge (23662); FRA00102\_Adam (27520)
+
+### Activité 2 : 
+
+- Que pouvez-vous conclure sur les textes les plus longs et les plus courts en tenant compte des métadonnées figurant dans le nom des fichiers (année, langue, code, auteur …) ?  
+- Pourquoi est-il utile de connaître la longueur des textes ?
+
+*Indice :* servez-vous des métadonnées contenues dans les noms de fichiers (année, mois, etc.) pour réfléchir aux raisons pour lesquelles certains discours sont plus longs ou plus courts. Cela pourrait refléter le contexte historique ou des évolutions dans le style de communication.
+
+## Densité du vocabulaire {#densité-du-vocabulaire}
+
+La densité du vocabulaire est mesurée en divisant le nombre de formes uniques par le nombre total de mots. Plus la densité est proche de 1, plus le vocabulaire est riche, c’est à dire dense. 
+
+### Activité 3 : 
+
+1. Calculez la densité des strophes suivantes
+
+**Strophe 1\.** Dans *Les yeux d’Elsa* de Louis Aragon :   
+Tes yeux sont si profonds qu’en me penchant pour boire  
+J’ai vu tous les soleils y venir se mirer  
+S’y jeter à mourir tous les désespérés  
+Tes yeux sont si profonds que j’y perds la mémoire
+
+**Strophe 2\.** Dans *Demain, dès l’aube* de Victor Hugo :   
+Demain, dès l’aube, à l’heure où blanchit la campagne,  
+Je partirai. Vois-tu, je sais que tu m’attends.  
+J’irai par la forêt, j’irai par la montagne.  
+Je ne puis demeurer loin de toi plus longtemps.
+
+*Indice :* Comparez la richesse lexicale dans les deux strophes. Un ratio plus haut de forme unique par rapport au nombre total de mots signifie une densité plus haute.
+
+2. Lisez la densité lexicale des documents de votre corpus, que remarquez-vous ?  
+- Ordre décroissant : FRA02401\_LeRouge (0.233); FRA05101\_Eekhoud (0.229); FRA00401\_Allais (0.218); FRA04501\_Barres (0.218); FRA02001\_Gilbert (0.217)  
+- Ordre croissant : FRA04202\_Rolland (0.054); FRA07601\_Leroux (0.070); FRA04901\_Dumas (0.070); FRA01902\_Gaboriau (0.074); FRA04301\_Achard (0.079)
+
+3. Comparez avec la taille du document, que remarquez-vous ?
+
+
+## Moyenne des mots par phrase {#moyenne-des-mots-par-phrase}
+
+La façon dont Voyant Tools calcule la longueur des phrases doit être considérée comme une approximation, spécifiquement parce qu'il est compliqué de faire la différence entre la fin d’une phase et une abréviation ou autre usage de ponctuation (par exemple, dans certains cas un point virgule peut marquer une limite entre deux phrases). L'analyse de la phrase est effectuée par un modèle contenant des instructions, une « classe » du langage de programmation Java appelée [BreakIterator](https://docs.oracle.com/javase/tutorial/i18n/text/about.html).
+
+### Activité 4 : 
+
+1. Examinez les statistiques relatives au nombre de mots par phrases et répondez à la question suivante : quelle.s tendance.s observez-vous lorsque vous comparez les moyennes de mots par phrase aux métadonnées (auteurs, années, etc.) figurant dans le titre du document ?  
+2. Cliquez sur les titres de quelques documents présentant des moyennes de mots par phrase intéressantes. Dirigez votre attention vers la fenêtre **Lecteur** et lisez quelques lignes. La lecture du texte apporte-t-elle de nouvelles informations à votre analyse des données ? Expliquez pourquoi.
+
+*Indice :* demandez vous si les phrases les plus longues reflètent de l'expression ou des différences de transcription. La lecture d’extraits peut aider à interpréter les données.
+
+# Cirrus et Résumé : Fréquences et filtres de mots vides (stopwords) {#cirrus-et-résumé-:-fréquences-et-filtres-de-mots-vides-(stopwords)}
+
+Maintenant que vous avez une idée de certaines caractéristiques globales de vos documents il est de temps de commencer à regarder les caractéristiques des termes dans votre corpus, et un des points de départ les plus communs est de comprendre ce que cela signifie que d’analyser un texte en se basant sur les fréquences.
+
+## Les fréquences non filtrées {#les-fréquences-non-filtrées}
+
+Le premier aspect avec lequel vous allez travailler est la fréquence brute, et pour ce faire on va utiliser la fenêtre **Cirrus**.
+
+### Activité 5 : 
+
+1. Quels sont les termes les plus fréquents dans le corpus ?  
+2. Que nous disent ces mots à propos du corpus ? Que signifient-ils ? 
+
+*Indice :* Passez la souris au-dessus des mots pour avoir leur fréquence exacte. Certains termes très fréquents peuvent ne pas avoir de sens particulier : s’agit-il de mots de fonction ou de mots liés au contexte ?
+
+## Mots vide (Stopwords) {#mots-vide-(stopwords)}
+
+L’importance donnée à n’importe quel terme dans notre analyse dépendra toujours de vos intérêts et de votre question de recherche. C’est pour cette raison que Voyant Tools offre la possibilité de filtrer certains mots. Une procédure courante pour obtenir des mots pertinents est de filtrer les unités lexicales grammaticales ou mots vides (stopwords) : articles, prépositions, interjections, pronoms, etc.
+
+### Activité 6 : 
+
+1. Quels mots outils sont dans le nuage de mots ?  
+2. Lesquels supprimeriez vous ? 
+
+*Indice :* Réfléchissez aux mots qui viennent entraver la logique générale de ce que vous voyez. Éditer la liste de mots vides aide à affiner votre approche.
+
+Voyant Tools a déjà une liste de mots vides chargée en français, que vous pouvez modifier comme suit : 
+
+1. Placez votre curseur sur coin supérieur droit de la fenêtre Cirrus et cliquez sur l’icône qui ressemble à un interrupteur (2ème en partant de la droite) : ![][add-stopwords1.png]
+
+Figure. Ouvrir les options du Cirrus.
+
+2. Une fenêtre avec plusieurs options s’affiche, sur la première ligne sélectionnez **Modifier la liste**![][add-stopwords2.png]
+
+Figure. Modifier la liste.
+
+3. Ajoutez les mots vides, tous séparés par un retour à la ligne (en utilisant la touche *Entrée*) :![][add-stopwords3.png]
+
+Figure. Supprimer des mots vides
+
+4. Une fois la liste des mots vides personnalisée, vous pouvez appuyer sur *Enregistrer*.
+
+Par défaut, une option qui dit “appliquer partout” est sélectionnée. Si cette option est activée, le filtre de mots vides est appliqué à tous les autres outils. Il est important de documenter votre décision. Une bonne pratique est de sauvegarder la liste de mots vides dans un fichier texte (.txt). Pour cette leçon nous avons créé une liste de termes à filtrer[^1], et vous pouvez l’utiliser si vous le souhaitez. Il faut avoir conscience que cela va impacter vos résultats.
+
+## Fréquences et Mots vides filtrés {#fréquences-et-mots-vides-filtrés}
+
+Comme mentionné dans le point précédent, les mots filtrés influencent les autres champs dans Voyant Tools. Dans ce cas, si vous laissez active l’option “Appliquer partout”, la liste des “termes les plus fréquents dans le corpus” va afficher les termes ayant le plus d'occurrences en excluant ceux présents sur la liste de mots vides. Dans notre cas on a :   
+madame (9912); jeune (9650); yeux (9606); femme (9262); homme (8993); temps (8874); monsieur (8854); point (8429); fois (8112); tête (7835)
+
+### Activité 7 : 
+
+Réfléchissez à ces mots et demandez-vous quelles informations ils fournissent, et en quoi ces informations diffèrent de celles que vous obtenez en observant le nuage de mots.  
+Indice : comparez les mots qui apparaissent le plus souvent une fois les mots vides supprimés. Cela modifie-t-il les thèmes que vous identifiez dans le corpus ?
+
+# Termes {#termes}
+
+Bien que les fréquences puissent nous dire quelque chose des textes, plusieurs facteurs peuvent réduire la pertinence de ces chiffres.  
+Dans la section suivante, différentes statistiques qui peuvent être obtenues dans l’onglet **Termes**, à droite de l’onglet **Cirrus** dans l’interface par défaut de Voyant Tools et vont être expliquées.
+
+## Fréquences normalisées (fréquence relative) {#fréquences-normalisées-(fréquence-relative)}
+
+Dans la section précédente, vous avez observé les “fréquences absolues” des mots. Cependant, si vous avez un corpus de 6 termes et un de 3 000, la fréquence absolue n’est pas très intéressante. Trois mots dans un corpus de six représentent 50% du total, tandis que trois termes dans un corpus de 6000 représentent 0,1% du total. Pour éviter la sur-représentation d’un terme, les linguistes ont mis au point un autre indicateur appelé “fréquence relative normalisée”. Celui-ce se calcul comme suit :   
+**(FréquenceAbsolue \* 1 000 000)/ NombreTotalDeMots**   
+Analysons un paragraphe comme exemple. Prenons la phrase : Mais mon coeur dit non, dit non, il y a 7 termes au total. Si on calcule la fréquence absolue et la fréquence relative on a :   
+terme | absolue | relative  
+coeur | 1 | 1\*1 000 000/7 \= 142 857  
+dit | 2 | 2\*1 000 000/7 \= 285 714
+
+Quel est l’avantage de cette méthode ? Si vous avez un corpus dans lequel le mot “coeur” avait la même proportion, par exemple 1000 occurrences sur 7000 mots, la fréquence absolue serait très différente, mais la fréquence relative serait la même, à 1,000∗1,000,000/7,000=142,857.
+
+Voyons comment cela fonctionne dans Voyant Tools : 
+
+1. Dans la section **Cirrus** (nuage de mots), on clique sur l’onglet **Termes**. Cela va ouvrir un tableau qui aura par défaut trois colonnes :   
+- **Termes** : liste de mots dans les documents (sans considérer les mots filtrés)  
+- **Total** : fréquence absolue de chaque terme  
+- **Tendance** : graphique de la distribution de chaque mot en considérant sa fréquence relative  
+2. Pour récupérer les informations sur les fréquences relatives des termes, dans la colonne dans la barre des noms de colonnes située à l'extrême droite, cliquez sur le triangle qui permet d'afficher davantage d'options, puis sélectionnez l'option « Relative » dans « Colonnes », comme indiqué sur l'image ci-dessous :![][termes-option.png]
+
+3. Si vous triez les colonnes par ordre décroissant comme on le ferait un tableur, vous pourrez voir que l’ordre des fréquences absolues (**Total**) et des fréquences relatives (**Proportion**) est le même.
+
+Note : Cette mesure est plus utile pour comparer différents corpus. Un corpus est un ensemble de textes ayant un ou plusieurs points communs. Dans notre cas, Voyant Tools interprète tous les romans comme un seul corpus. Si vous souhaitez considérer chaque discours comme un corpus, il faudrait enregistrer votre texte dans un tableur (HTML ou XML), où les métadonnées sont exprimées dans des colonnes ou de balises. 
+
+## Asymétrie statistique {#asymétrie-statistique}
+
+Même si la fréquence relative aide à comprendre la distribution du corpus, il existe une mesure de la constance d’un terme à travers les documents : coefficient de dissymétrie.
+
+Cette mesure donne une idée de la probabilité de la distribution d’une variable sans avoir besoin de faire de représentation graphique. C’est calculé en observant les déviation des fréquences par rapport à la moyenne, pour déterminer si les occurrences à droite de la moyenne (asymétrie négative) sont plus hautes que celles à gauche (asymétrie positive). Plus le degré d’asymétrie statistique est proche de zéro, plus la distribution de ce terme est régulière (car il apparaît de façon régulière dans tous les documents).
+
+Ce qui n’est pas très intuitif, c’est que si un terme présente une asymétrie avec des valeurs positives, cela signifie qu’il se situe en dessous de la moyenne ; plus la valeur est élevée, plus le terme est asymétrique (il apparaît fréquemment dans un document donné, mais très rarement dans l'ensemble du corpus). À l'inverse, les valeurs négatives indiquent que le terme a tendance à se situer au-dessus de la moyenne.![][asymetrie.png]  
+Pour obtenir cette mesure dans Voyant Tools, suivez les étapes faites pour obtenir la fréquence relative, mais cochez le Coefficient de dissymétrie. Cette mesure permet de constater, par exemple, que le mot « femme », bien qu'il apparaisse fréquemment, n'affiche pas seulement une fréquence constante dans l'ensemble du corpus, mais qu'il tend à se situer en dessous de la moyenne, car son coefficient de dyssymétrie est positive (0,9).
+
+## Mots distinctifs (par rapport au reste du corpus) {#mots-distinctifs-(par-rapport-au-reste-du-corpus)}
+
+Comme on peut s’y attendre, les informations les plus intéressantes ne se trouvent généralement pas parmi les mots les plus fréquents, car ceux-ci sont souvent les plus évidents. Dans le domaine de la recherche d'informations, d'autres mesures ont été mises au point pour permettre d'identifier les termes qui distinguent un document d'un autre.
+
+L'une des mesures les plus couramment utilisées est appelée « tf-idf » (fréquence du terme – fréquence inverse du document). Cette mesure vise à exprimer numériquement la pertinence d’un document au sein d’une collection donnée. Autrement dit, dans une collection de textes sur les pommes, le mot « pomme » peut apparaître de nombreuses fois, mais cela ne vous apprend rien de nouveau sur la collection. Il faut plutôt comparer sa fréquence dans un document donné à sa fréquence dans la collection (fréquence inverse du document).
+
+Dans Voyant, le tf-idf est calculé comme suit :  
+Fréquence Absolue (tf) / Nombre de Mots (N) \* log10(Nombre de documents/ Nombre d'occurrence du terme dans les documents)
+
+Ou comme une formule : 
+[][formuleLaTex.png]  
+
+### Activité 8 : 
+
+Observer les mots distinctifs (par rapport au reste du corpus) de chaque document et noter quelles hypothèses on peut en tirer.
+
+1. FRA00101\_Adam : mairesse (76), norine (42), claude (105), céran (33), brunelle (22).  
+2. FRA00102\_Adam : mélissandre (93), tiburce (57), noves (36), gardanne (14), pétrarque (19).  
+3. FRA00201\_Audoux : deslois (38), ismérie (24), alphonse (42), colette (29), pauline (26).  
+4. FRA00301\_Aimard : doña (132), belhumeur (110), luz (109), comanches (77), ramon (59).  
+5. FRA00302\_Aimard : villiers (185), grigny (73), maleval (62), canadien (86), léona (53).  
+6. FRA00401\_Allais : captain (194), cap (355), cocktail (19), confetti (21), loth (17).  
+7. FRA00501\_Balzac : philomène (165), watteville (124), rodolphe (134), besançon (90), francesca (82).
+
+Indice : Ces mots sont spécifiques à chaque document et peuvent vous aider à comprendre les thèmes spécifiques de chaque document.
+
+# Mots en Contexte {#mots-en-contexte}
+
+que certains considèrent comme ayant inauguré le domaine des humanités numériques est l’Index Thomisticus, une concordance de l’œuvre de Thomas d’Aquin dirigée par le philologue et religieux Roberto Busa, et codée par une équipe de développeurs comptant des dizaines de femmes. La méthode de concordance au cœur de ce projet, dont la réalisation a pris 34 ans, est une fonction intégrée à Voyant Tools : dans le coin inférieur droit, dans la fenêtre **Contextes**, il est possible d'effectuer des requêtes de concordance à gauche et à droite pour des termes spécifiques.
+
+Le tableau contient les colonnes suivant par défaut : 
+
+- **Document** : Nom du document dans lequel est présent le terme recherché  
+- **Gauche** : contexte gauche du mot-clé (peut être modifié pour afficher plus ou moins de mots, et si vous cliquez sur le cellule elle peut s'agrandir pour montrer plus de contexte).  
+- **Terme** : Mot clé de la recherche  
+- **Droite** : contexte droit
+
+La colonne **Position** peut être ajoutée pour montrer où le mot clé a été trouvé dans le document![][contexte-option]  
+Figure. Ajouter une colonne Position.
+
+Voyant Tools autorise la recherche grâce à des caractères génériques. Voici quelques exemples : 
+
+- am\* : cette requête retourne tous les mots commençant par le préfixe "am" (amour, amitié, amant)  
+- \*eur : les termes se terminant par le suffixe "eur" (ardeur, douceur, langueur)  
+- amour, tendresse : il est possible de rechercher plusieurs termes en les séparant par des virgules  
+- "la flamme de mon cœur" : recherche l'expression exacte  
+- "amour passion"\~ 5 : recherche les termes entre guillemets, l'ordre n'a pas d'importance, et jusqu'à 5 mots peuvent s'intercaler entre "amour" et "passion"
+
+### Activité 9 : 
+
+Recherche un terme qui nous semble intéressant, on utilisera quelques caractères génériques. Trier les rangées en utilisant les différentes colonnes (**Document**, **Gauche**, **Droite** et **Position**) : quelles conclusions pouvez-vous tirer sur les mots clés recherchés d’après les informations dans ces colonnes ?
+
+Indice :  Utilisez la position et le contexte pour voir comment un terme est utilisé. Apparaît-il plutôt en début ou en fin de discours ? Le ton est-il cohérent ? 
+
+# Exporter des tableaux {#exporter-des-tableaux}
+
+Afin d’exporter les données, cliquez sur la boite avec une flèche qui apparaît quand pour passez la souris sur le coin supérieur droit de **Contexte**. Dépliez les options **Exporter les données actuelles** et cliquez sur la dernière option “exporter en TSV (texte) toutes les données disponibles”.  
+Cela ouvre une page où les champs sont séparés par une tabulation.  
+![][export-tsv.png]  
+Figure. Exporter Contextes
+
+Sélectionnez toutes les données et faites un copier-coller dans un tableur. Si cela ne fonctionne pas, enregistrez les données dans un fichier TXT dans un éditeur de texte (sans oublier l’encodage UTF-8) puis importez les données dans votre tableur. Dans Excel, cela se trouve dans l’onglet Données, et “À partir d’un fichier texte/csv”.   
+![][excel.png]  
+Figure. Importer les données depuis un fichier texte dans Excel.
+
+# Correction des activités {#correction-des-activités}
+
+Activité 1 :  Ce corpus comporte 2 documents, 4 mots et 3 formes verbales uniques.
+
+Activité 2 :   
+1\. On peut par exemple observer quels auteurs écrivent des textes plus longs. Il faudrait modifier les noms des fichiers pour ajouter des métadonnées à analyser.  
+2\. Connaître la longueur des textes nous permet de comprendre l’homogénéité ou la disparité de votre corpus, mais également de comprendre les tendances (par exemple, quels auteurs ont écrit des textes plus court, en ajoutant des métadonnées disponibles pour le corpus ELTeC on pourrait ajouter les dates de publications et voir si la période influence la longueur du texte, etc.)
+
+Activité 3 : 
+
+1. La première strophe contient 36 mots et 29 formes uniques, donc 29/36 égal une densité lexicale de 0,806.
+
+La deuxième strophe contient 35 mots et 30 formes uniques, donc 30/35 égal une densité lexicale de 0,857.
+
+2. Comme on peut le voir, la différence entre des vers écrits par Louis Aragon et Victor Hugo est de 0,051, ce qui n’est pas très haut. Vous devez faire attention en interprétant ces chiffres car ils sont seulement un indicateur quantitatif de la richesse lexicale et n’incluent pas de paramètres tels que les rimes ou la complexité des termes.
+
+Il y a des corrélation entre la taille des documents et la densité du vocabulaire. Les textes les plus longs sont aussi ceux avec les densités de vocabulaire plus faibles (par exemple : Rolland, Leroux, Gaboriau et Dumas), tandis que les textes plus courts ont les densités de vocabulaire les plus élevées (Le Rouge et Gilbert). On peut supposer que dans un texte plus long il y a plus de possibilité de se répéter. Cela dit, on en apprend surtout plus sur le style d’écriture des différents auteurs.
+
+Activité 4 :   
+Avec les quelques premiers résultats affichés, il ne semble pas y avoir de corrélation entre la moyenne de mots par phrases et la taille des documents. 
+
+Activité 5 : 
+
+1. madame (9912); jeune (9650); yeux (9606); femme (9262); homme (8993); temps (8874); monsieur (8854); point (8429); fois (8112); tête (7835)  
+2. Ces premiers termes donnent une indication quant aux points centraux du corpus étudié. Si on voulait les omettre il faudrait les ajouter à la liste des mots vides.
+
+La leçon originale en espagnol a été écrite grâce au soutien de la British Academy et préparée durant le Programming Historian Writing Workshop à l’Universidad de los Andes à Bogotá, Colombia, du 31 juillet au 3 août 2018\.
+
+# Bibliographie {#bibliographie}
+
+1. Stéfan Sinclair and Geoffrey Rockwell, Voyant Tools, Version 2.6.13, The Voyant Consortium, Web, 2016, [https://voyant-tools.org/](https://voyant-tools.org/)  
+2. Documentation de Voyant Tools, https://perma.cc/CL4Q-XMZ5
+
+# Annexe
+
+### Liste des mots vides : 
+
+a  
+afin  
+ah  
+ai  
+aie  
+aient  
+aies  
+ainsi  
+ait  
+alors  
+ap.  
+apr.  
+après  
+as  
+assez  
+attendu  
+au  
+au-delà  
+au-devant  
+aucun  
+aucune  
+audit  
+auprès  
+auquel  
+aura  
+aurai  
+auraient  
+aurais  
+aurait  
+auras  
+aurez  
+auriez  
+aurions  
+aurons  
+auront  
+aussi  
+autour  
+autre  
+autres  
+autrui  
+aux  
+auxdites  
+auxdits  
+auxquelles  
+auxquels  
+avaient  
+avais  
+avait  
+avant  
+avec  
+avez  
+aviez  
+avions  
+avoir  
+avons  
+ayant  
+ayez  
+ayons  
+b  
+bah  
+banco  
+ben  
+bien  
+bé  
+c  
+c'  
+c'est  
+c'était  
+car  
+ce  
+ceci  
+cela  
+celle  
+celle-ci  
+celle-là  
+celles  
+celles-ci  
+celles-là  
+celui  
+celui-ci  
+celui-là  
+celà  
+cent  
+cents  
+cependant  
+certain  
+certaine  
+certaines  
+certains  
+ces  
+cet  
+cette  
+ceux  
+ceux-ci  
+ceux-là  
+cf.  
+cg  
+cgr  
+chacun  
+chacune  
+chaque  
+chez  
+chose  
+ci  
+cinq  
+cinquante  
+cinquante-cinq  
+cinquante-deux  
+cinquante-et-un  
+cinquante-huit  
+cinquante-neuf  
+cinquante-quatre  
+cinquante-sept  
+cinquante-six  
+cinquante-trois  
+cl  
+cm  
+cm²  
+comme  
+comment  
+contre  
+d  
+d'  
+d'après  
+d'un  
+d'une  
+dans  
+de  
+depuis  
+derrière  
+des  
+desdites  
+desdits  
+desquelles  
+desquels  
+deux  
+devant  
+devers  
+dg  
+différentes  
+différents  
+dire  
+dit  
+divers  
+diverses  
+dix  
+dix-huit  
+dix-neuf  
+dix-sept  
+dl  
+dm  
+donc  
+dont  
+douze  
+du  
+dudit  
+duquel  
+durant  
+dès  
+déjà  
+e  
+eh  
+elle  
+elles  
+en  
+en-dehors  
+encore  
+enfin  
+entre  
+envers  
+es  
+est  
+et  
+eu  
+eue  
+eues  
+euh  
+eurent  
+eus  
+eusse  
+eussent  
+eusses  
+eussiez  
+eussions  
+eut  
+eux  
+eûmes  
+eût  
+eûtes  
+f  
+faire  
+faisait  
+fait  
+faut  
+fi  
+fit  
+flac  
+fors  
+furent  
+fus  
+fusse  
+fussent  
+fusses  
+fussiez  
+fussions  
+fut  
+fûmes  
+fût  
+fûtes  
+g  
+ghz  
+gr  
+h  
+ha  
+han  
+hein  
+hem  
+heu  
+hg  
+hl  
+hm  
+hm³  
+holà  
+hop  
+hormis  
+hors  
+huit  
+hum  
+hé  
+i  
+ici  
+il  
+ils  
+j  
+j'  
+j'ai  
+j'avais  
+j'étais  
+jamais  
+je  
+jusqu'  
+jusqu'au  
+jusqu'aux  
+jusqu'à  
+jusque  
+k  
+kg  
+km  
+km²  
+l  
+l'  
+l'autre  
+l'on  
+l'un  
+l'une  
+la  
+laquelle  
+le  
+lequel  
+les  
+lesquelles  
+lesquels  
+leur  
+leurs  
+lez  
+lors  
+lorsqu'  
+lorsque  
+lui  
+là  
+lès  
+m  
+m'  
+ma  
+maint  
+mainte  
+maintes  
+maints  
+mais  
+malgré  
+me  
+mes  
+mg  
+mgr  
+mhz  
+mil  
+mille  
+milliards  
+millions  
+ml  
+mm  
+mm²  
+moi  
+moins  
+mon  
+moyennant  
+mt  
+m²  
+m³  
+même  
+mêmes  
+n  
+n'avait  
+n'est  
+n'y  
+n'était  
+ne  
+neuf  
+ni  
+non  
+nonante  
+nonobstant  
+nos  
+notre  
+nous  
+nul  
+nulle  
+nº  
+néanmoins  
+o  
+octante  
+oh  
+on  
+ont  
+onze  
+or  
+ou  
+oui  
+outre  
+où  
+p  
+par  
+par-delà  
+parbleu  
+parce  
+parmi  
+pas  
+passé  
+pendant  
+personne  
+peu  
+peut  
+plus  
+plus\_d'un  
+plus\_d'une  
+plusieurs  
+pour  
+pourquoi  
+pourtant  
+pourvu  
+pouvait  
+près  
+puis  
+puisqu'  
+puisque  
+q  
+qu  
+qu'  
+qu'elle  
+qu'elles  
+qu'il  
+qu'ils  
+qu'on  
+quand  
+quant  
+quarante  
+quarante-cinq  
+quarante-deux  
+quarante-et-un  
+quarante-huit  
+quarante-neuf  
+quarante-quatre  
+quarante-sept  
+quarante-six  
+quarante-trois  
+quatorze  
+quatre  
+quatre-vingt  
+quatre-vingt-cinq  
+quatre-vingt-deux  
+quatre-vingt-dix  
+quatre-vingt-dix-huit  
+quatre-vingt-dix-neuf  
+quatre-vingt-dix-sept  
+quatre-vingt-douze  
+quatre-vingt-huit  
+quatre-vingt-neuf  
+quatre-vingt-onze  
+quatre-vingt-quatorze  
+quatre-vingt-quatre  
+quatre-vingt-quinze  
+quatre-vingt-seize  
+quatre-vingt-sept  
+quatre-vingt-six  
+quatre-vingt-treize  
+quatre-vingt-trois  
+quatre-vingt-un  
+quatre-vingt-une  
+quatre-vingts  
+que  
+quel  
+quelle  
+quelles  
+quelqu'  
+quelqu'un  
+quelqu'une  
+quelque  
+quelques  
+quelques-unes  
+quelques-uns  
+quels  
+qui  
+quiconque  
+quinze  
+quoi  
+quoiqu'  
+quoique  
+r  
+revoici  
+revoilà  
+rien  
+répondit  
+s  
+s'  
+s'il  
+s'écria  
+s'était  
+sa  
+sais  
+sans  
+sauf  
+se  
+seize  
+selon  
+sept  
+septante  
+sera  
+serai  
+seraient  
+serais  
+serait  
+seras  
+serez  
+seriez  
+serions  
+serons  
+seront  
+ses  
+si  
+sinon  
+six  
+soi  
+soient  
+sois  
+soit  
+soixante  
+soixante-cinq  
+soixante-deux  
+soixante-dix  
+soixante-dix-huit  
+soixante-dix-neuf  
+soixante-dix-sept  
+soixante-douze  
+soixante-et-onze  
+soixante-et-un  
+soixante-et-une  
+soixante-huit  
+soixante-neuf  
+soixante-quatorze  
+soixante-quatre  
+soixante-quinze  
+soixante-seize  
+soixante-sept  
+soixante-six  
+soixante-treize  
+soixante-trois  
+sommes  
+son  
+sont  
+sous  
+soyez  
+soyons  
+suis  
+suite  
+sur  
+sus  
+t  
+t'  
+ta  
+tacatac  
+tandis  
+tant  
+te  
+tel  
+telle  
+telles  
+tels  
+tes  
+toi  
+ton  
+toujours  
+tous  
+tout  
+toute  
+toutefois  
+toutes  
+treize  
+trente  
+trente-cinq  
+trente-deux  
+trente-et-un  
+trente-huit  
+trente-neuf  
+trente-quatre  
+trente-sept  
+trente-six  
+trente-trois  
+trois  
+trop  
+très  
+tu  
+u  
+un  
+une  
+unes  
+uns  
+usd  
+v  
+vers  
+via  
+vingt  
+vingt-cinq  
+vingt-deux  
+vingt-huit  
+vingt-neuf  
+vingt-quatre  
+vingt-sept  
+vingt-six  
+vingt-trois  
+vis-à-vis  
+voici  
+voilà  
+voir  
+vos  
+votre  
+vous  
+w  
+x  
+y  
+z  
+zéro  
+à  
+ç'  
+ça  
+ès  
+étaient  
+étais  
+était  
+étant  
+étiez  
+étions  
+été  
+étée  
+étées  
+étés  
+êtes  
+être  
+ô
